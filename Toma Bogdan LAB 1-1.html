@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Rețetele Mele Preferate</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; color: #d35400; }
+        .retete { display: flex; gap: 20px; justify-content: space-around; margin-top: 20px; }
+        .reteta { width: 30%; text-align: center; }
+        .reteta img { width: 100%; border-radius: 8px; }
+        .newsletter { margin-top: 40px; padding: 20px; background-color: #f8f8f8; border-radius: 8px; }
+        label { display: block; margin-top: 10px; }
+        input { padding: 8px; width: 100%; box-sizing: border-box; }
+        button { margin-top: 15px; padding: 10px 15px; background-color: #d35400; color: white; border: none; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <h1>Rețetele Mele Preferate</h1>
+
+    <p>Bine ai venit în colecția mea de rețete delicioase! Explorează mai jos preparatele recomandate și nu uita să te abonezi la newsletter pentru a primi rețete noi direct pe email!</p>
+
+    <section class="retete">
+        <div class="reteta">
+            <img src="https://savoriurbane.com/wp-content/uploads/2017/08/paste-carbonara-reteta-originala-italiana.jpg" alt="Paste Carbonara">
+            <h3>Paste Carbonara</h3>
+            <p>O rețetă italiană clasică, cremoasă și gata în doar câteva minute.</p>
+            <a href="https://savoriurbane.com/spaghete-carbonara-reteta-autentica-italiana/" target="_blank">Vezi rețeta completă</a>
+        </div>
+        <div class="reteta">
+            <img src="https://savoriurbane.com/wp-content/uploads/2022/02/Salata-Caesar-reteta-originala-cu-dressing-cremos-crutoane-si-parmezan-savori-urbane.jpg" alt="Salată Caesar">
+            <h3>Salată Caesar</h3>
+            <p>O combinație fresh de salată, pui și crutoane crocante.</p>
+            <a href="https://savoriurbane.com/salata-caesar-reteta-clasica-cu-dressing-cremos-crutoane-si-parmezan/" target="_blank">Vezi rețeta completă</a>
+        </div>
+        <div class="reteta">
+            <img src="https://savoriurbane.com/wp-content/uploads/2017/07/Cheesecake-reteta-clasica-New-York-Style-pas-cu-pas-Savori-Urbane.jpg" alt="Cheesecake">
+            <h3>Cheesecake</h3>
+            <p>Un desert fin și cremos cu blat crocant de biscuiți.</p>
+            <a href="https://savoriurbane.com/cheesecake-reteta-clasica-new-york-style/" target="_blank">Vezi rețeta completă</a>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Abonare la Newsletter</h2>
+        <form>
+            <label for="nume">Nume:</label>
+            <input type="text" id="nume" name="nume" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Abonează-mă</button>
+        </form>
+    </section>
+
+</body>
+</html>
