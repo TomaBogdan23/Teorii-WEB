@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Interfață Bancară — Mockup</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --accent-2:#7c3aed; --success:#16a34a;
+      --glass: rgba(255,255,255,0.04);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#071026 0%, #081226 60%);color:#e6eef6;min-height:100vh}
+    .container{max-width:1100px;margin:28px auto;padding:20px}
+
+    /* Top bar */
+    .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#021029}
+    .title{font-size:18px;font-weight:600}
+    .profile{display:flex;gap:12px;align-items:center}
+    .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#fff2 0%, #fff0 50%);display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--accent-2)}
+
+    /* layout */
+    .grid{display:grid;grid-template-columns:260px 1fr;gap:18px}
+    .sidebar{background:var(--card);padding:16px;border-radius:12px}
+    .nav{display:flex;flex-direction:column;gap:8px}
+    .nav button{background:transparent;border:none;color:var(--muted);padding:10px;border-radius:8px;text-align:left;cursor:pointer}
+    .nav button.active{background:var(--glass);color:var(--accent)}
+
+    .main{padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px}
+    .grid-row{display:grid;grid-template-columns:1fr 360px;gap:18px}
+
+    /* Cards */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px}
+    .balance{display:flex;flex-direction:column;gap:8px}
+    .balance h2{margin:0;font-size:14px;color:var(--muted)}
+    .amount{font-size:28px;font-weight:700}
+
+    .actions{display:flex;gap:10px;margin-top:6px}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#021029}
+    .btn-soft{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted)}
+
+    /* quick transfer form */
+    .form-row{display:flex;gap:8px;margin-top:8px}
+    input,select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:inherit;width:100%}
+
+    /* transactions */
+    .tx-list{margin-top:12px}
+    .tx{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:linear-gradient(180deg, transparent, rgba(255,255,255,0.01));margin-bottom:8px}
+    .tx .meta{display:flex;gap:10px;align-items:center}
+    .tx .meta .dot{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700}
+    .tx .right{display:flex;flex-direction:column;align-items:flex-end}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr;}
+      .grid-row{grid-template-columns:1fr}
+      .sidebar{display:flex;overflow:auto}
+    }
+
+    /* small misc */
+    .small{font-size:13px}
+    .accent-pill{padding:6px 10px;border-radius:999px;background:rgba(6,182,212,0.12);color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">BN</div>
+        <div>
+          <div class="title">BancaNet — Interfață</div>
+          <div class="small muted">Cont demo • UX demo</div>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="small muted">Bine ai venit, <strong id="userName">Andrei</strong></div>
+        <div class="avatar">A</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <aside class="sidebar card">
+        <div class="nav" role="navigation" aria-label="Meniu principal">
+          <button class="active" data-view="dashboard">Dashboard</button>
+          <button data-view="conturi">Conturi</button>
+          <button data-view="plati">Plăți & Transfer</button>
+          <button data-view="carduri">Carduri</button>
+          <button data-view="setari">Setări</button>
+        </div>
+
+        <div style="margin-top:14px;border-top:1px dashed rgba(255,255,255,0.02);padding-top:12px">
+          <div class="small muted">Contact:</div>
+          <div class="small">Suport 24/7 — +40 21 000 000</div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="view-dashboard">
+          <div class="grid-row">
+            <div>
+              <div class="card balance">
+                <h2>Sold total</h2>
+                <div class="amount" id="totalBalance">0,00 RON</div>
+                <div class="muted small">Cont curent • RON</div>
+                <div class="actions">
+                  <button class="btn btn-primary" id="transferBtn">Transferă</button>
+                  <button class="btn btn-soft" id="payBtn">Plătește factură</button>
+                </div>
+
+                <div class="form-row" style="margin-top:12px">
+                  <input id="payTo" placeholder="Nume / IBAN" />
+                  <input id="amount" placeholder="Sumă" />
+                </div>
+              </div>
+
+              <div class="card tx-list" style="margin-top:14px">
+                <h3 style="margin:0 0 8px 0">Tranzacții recente</h3>
+                <div id="txContainer">
+                  <!-- tranzacții populate din JS -->
+                </div>
+                <div style="text-align:center;margin-top:6px"><button class="btn btn-soft" id="moreTx">Încarcă mai multe</button></div>
+              </div>
+            </div>
+
+            <aside>
+              <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div class="muted small">Card curent</div>
+                    <div style="font-weight:700;font-size:16px">Visa • 1234</div>
+                  </div>
+                  <div class="accent-pill">Activ</div>
+                </div>
+                <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.03);margin:12px 0">
+                <div class="small muted">Limite</div>
+                <div class="small">Plată contactless: 500 RON / zi</div>
+                <div class="small">Retragere numerar: 2000 RON / zi</div>
+                <div style="margin-top:10px"><button class="btn btn-primary" style="width:100%">Blochează card</button></div>
+              </div>
+
+              <div class="card" style="margin-top:12px">
+                <div class="muted small">Oferte</div>
+                <div style="font-weight:700;margin-top:6px">Depozit 6% — 12 luni</div>
+                <div class="muted small" style="margin-top:6px">Profitați de dobânzi promoționale pentru economii.</div>
+                <div style="margin-top:8px"><button class="btn btn-soft" style="width:100%">Detalii</button></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- alte view-uri (mock) -->
+        <section id="view-conturi" style="display:none">
+          <div class="card"><h3>Conturi</h3><p class="muted">Listă de conturi (demo)</p></div>
+        </section>
+        <section id="view-plati" style="display:none">
+          <div class="card"><h3>Plăți & Transfer</h3><p class="muted">Formular de transfer</p></div>
+        </section>
+        <section id="view-carduri" style="display:none">
+          <div class="card"><h3>Carduri</h3><p class="muted">Gestionare carduri</p></div>
+        </section>
+        <section id="view-setari" style="display:none">
+          <div class="card"><h3>Setări</h3><p class="muted">Preferințe cont</p></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Demo data (UI-only). Nu folosi în producție.
+    const user = {name:'Andrei Popescu'}
+    const accounts = [{id:'RON-1', balance:5243.45}]
+    const tx = [
+      {id:1,who:'Plata factură',amount:-210.50,date:'2025-10-10'},
+      {id:2,who:'Salariu',amount:3500.00,date:'2025-10-01'},
+      {id:3,who:'Coffee Shop',amount:-18.60,date:'2025-09-28'}
+    ]
+
+    // init
+    document.getElementById('userName').textContent = user.name.split(' ')[0]
+    document.getElementById('totalBalance').textContent = formatMoney(accounts.reduce((s,a)=>s+a.balance,0))
+
+    function formatMoney(x){return x.toLocaleString('ro-RO',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' RON'}
+
+    function renderTx(){
+      const c = document.getElementById('txContainer'); c.innerHTML = '';
+      tx.forEach(t=>{
+        const el = document.createElement('div'); el.className='tx';
+        el.innerHTML = `
+          <div class="meta">
+            <div class="dot" style="background:linear-gradient(135deg, rgba(124,58,237,0.12), rgba(6,182,212,0.08));">${t.who.charAt(0)}</div>
+            <div>
+              <div style="font-weight:700">${t.who}</div>
+              <div class="muted small">${t.date}</div>
+            </div>
+          </div>
+          <div class="right">
+            <div style="font-weight:700">${t.amount < 0 ? '-' : '+'} ${Math.abs(t.amount).toLocaleString('ro-RO',{minimumFractionDigits:2})} RON</div>
+            <div class="muted small">${t.amount<0? 'Debit':'Credit'}</div>
+          </div>
+        `;
+        c.appendChild(el);
+      })
+    }
+
+    renderTx();
+
+    // nav
+    document.querySelectorAll('.nav button').forEach(b=>{
+      b.addEventListener('click',()=>{
+        document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'))
+        b.classList.add('active')
+        const view = b.dataset.view
+        document.querySelectorAll('main section').forEach(s=>s.style.display='none')
+        const v = document.getElementById('view-'+view)
+        if(v) v.style.display='block'
+      })
+    })
+
+    // mock transfer
+    document.getElementById('transferBtn').addEventListener('click',()=>{
+      const to = document.getElementById('payTo').value || 'Destinatar demo'
+      const amount = parseFloat(document.getElementById('amount').value || '0')
+      if(!amount || amount<=0){alert('Introduceți o sumă validă.'); return}
+      // update demo data
+      accounts[0].balance -= amount
+      tx.unshift({id:Date.now(),who:`Transfer către ${to}`,amount:-amount,date:new Date().toISOString().slice(0,10)})
+      document.getElementById('totalBalance').textContent = formatMoney(accounts[0].balance)
+      renderTx()
+      document.getElementById('payTo').value=''; document.getElementById('amount').value=''
+      alert('Transfer (demo) efectuat cu succes')
+    })
+
+    document.getElementById('moreTx').addEventListener('click',()=>{
+      // adaugă tranzacții demo
+      tx.push({id:Date.now()+1,who:'Plată utilități',amount:-120.00,date:'2025-09-12'})
+      tx.push({id:Date.now()+2,who:'Refund',amount:45.30,date:'2025-08-21'})
+      renderTx()
+    })
+
+    // accessibility: keyboard
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='/' && document.activeElement.tagName !== 'INPUT'){
+        e.preventDefault(); document.getElementById('payTo').focus()
+      }
+    })
+  </script>
+</body>
+</html>
